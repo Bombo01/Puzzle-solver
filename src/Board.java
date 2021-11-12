@@ -20,16 +20,18 @@ public class Board {
      * spostamento dello zero dalla tabella genitore
      */
     private static class node {
-        int _level = 0; //livello del nodo
+        public int level = 0; //livello del nodo
         int[][] nodeBoard = new int[4][4];
         node parent = null;
-        node up = move(1, 0);
-        node right = move(0, 1);
-        node down = move(-1, 0);
-        node left = move(0, -1);
 
-        public node(int[][] board) {
+        public node(int _level, int[][] board, node _parent) {
+            int level = _level;
             nodeBoard = board.clone();
+            parent = _parent;
+            node up = move(1, 0);
+            node right = move(0, 1);
+            node down = move(-1, 0);
+            node left = move(0, -1);
         }
 
         /**
@@ -41,16 +43,23 @@ public class Board {
          */
         public node move(int x, int y){
             int[][] _tempBoard = nodeBoard.clone();
+
             int[] pos0 = Board.linearSearch(0, _tempBoard);
             if((x > 0 && pos0[0] != 3) || (x < 0 && pos0[0] != 0)){
                 int temp = _tempBoard[pos0[0]+x][pos0[1]];
                 _tempBoard[pos0[0]][pos0[1]] = temp;
                 _tempBoard[pos0[0]+x][pos0[1]] = 0;
-                return new node(_tempBoard);
+
+                //verificare distanza mah
+
+                return new node(level+1, _tempBoard, ); //<-- trovare modo per dire del parentNode
             } else if((y > 0 && pos0[1] != 3) || (y < 0 && pos0[1] != 0)){
                 int temp = _tempBoard[pos0[0]][pos0[1]+y];
                 _tempBoard[pos0[0]][pos0[1]] = temp;
                 _tempBoard[pos0[0]][pos0[1]+y] = 0;
+
+                //verificare distanza mah
+
                 return new node(_tempBoard);
             } else{
                 throw new IllegalArgumentException();
