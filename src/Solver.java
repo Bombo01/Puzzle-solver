@@ -1,6 +1,7 @@
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -15,20 +16,26 @@ import java.util.Scanner;
  */
 public class Solver {
     public static void main(String[] args) {
-        /* controllo se il numero di parametri passati dalla
-        riga di comandi è giusto o no */
+        // controllo se il numero di parametri passati dalla riga di comandi è giusto o no
         if (args.length != 1) {
             System.err.println("Uso: java Solver document.txt");
         } else {
             try {
-                int[][] boardArray = new int[3][3];
                 FileReader fileReader = new FileReader(args[0]);
                 Scanner scanner = new Scanner(fileReader);
+
+                ArrayList<Integer> cells = new ArrayList<>();
                 while (scanner.hasNext()) { //finchè nel file sono presenti numeri li inserisco in boardArray
-                    for (int i = 0; i < boardArray.length; i++) {
-                        for (int j = 0; j < boardArray.length; j++) {
-                            boardArray[i][j] = scanner.nextInt();
-                        }
+                    cells.add(scanner.nextInt());
+                }
+
+                int tableDimension = (int) Math.sqrt(cells.size());
+                int[][] boardArray = new int[tableDimension][tableDimension];
+                int counter = 0;
+                for (int i = 0; i < boardArray.length; i++) {
+                    for (int j = 0; j < boardArray.length; j++) {
+                        boardArray[i][j] = cells.get(counter);
+                        counter++;
                     }
                 }
 
@@ -52,12 +59,9 @@ public class Solver {
                 for (int i = reversePath.size() - 1; i >= 0; i--)
                     System.out.println(reversePath.get(i));
             } catch (IOException | NoSuchElementException | IllegalArgumentException ex) {
-                /*
-                errore sulla lettura del file oppure sui dati inseriti
-                 */
-                System.err.println("Errore! Controllare i dati inseriti");
+                // errore sulla lettura del file oppure sui dati inseriti
+                System.err.println("Controllare i dati inseriti");
             }
-
         }
     }
 }
