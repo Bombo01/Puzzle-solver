@@ -26,7 +26,7 @@ This app will print something like:
 1 2 3 4 5 6 7 8 0 
 ```
 
-where ```4``` is the Manhattan distance of the given board and the other lines are the steps to take to find the solution:  
+where ```4``` is the Manhattan distance of the given board and the other lines are the steps to do in order to find the solution:  
 ```
 0 1 3       1 0 3       1 2 3       1 2 3       1 2 3
 4 2 5       4 2 5       4 0 5       4 5 0       4 5 6
