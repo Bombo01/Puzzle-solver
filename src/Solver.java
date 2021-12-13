@@ -29,9 +29,8 @@ public class Solver {
                     cells.add(scanner.nextInt());
                 }
 
-                int tableDimension = (int) Math.sqrt(cells.size());
-                int[][] boardArray = new int[tableDimension][tableDimension];
-                int counter = 0;
+                int[][] boardArray = new int[cells.get(0)][cells.get(0)];
+                int counter = 1;
                 for (int i = 0; i < boardArray.length; i++) {
                     for (int j = 0; j < boardArray.length; j++) {
                         boardArray[i][j] = cells.get(counter);
